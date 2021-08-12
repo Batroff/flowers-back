@@ -1,0 +1,15 @@
+{% extends "layouts/fullscreen.html" %}
+
+{% block title %} Вход {% endblock title %}
+
+{% block content %}
+    {% if msg %}
+        <div class="message">{{ msg }}</div>
+    {% endif %}
+
+    <form method="post" action="">
+        {{ form.username(placeholder='Логин') }}
+        {{ form.password(placeholder='Пароль', type='password') }}
+        <button type="submit" name="login" class="btn btn-primary">Войти</button>
+    </form>
+{% endblock content %}
