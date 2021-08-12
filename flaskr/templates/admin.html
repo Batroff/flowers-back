@@ -3,6 +3,68 @@
 {% block title %} Панель управления {% endblock title %}
 
 {% block content %}
-    <h1>ADMIN</h1>
-    <a href="/logout">Выйти</a>
+  <nav class="navigation">
+    <div class="wrapper">
+      <h1>Панель управления</h1>
+      <a href="/logout">Выйти</a>
+    </div>
+  </nav>
+
+  <section class="panel">
+    <div class="wrapper">
+      <table>
+        <thead>
+        <tr>
+          <th>ID</th>
+          <th>Название</th>
+          <th>Описание</th>
+          <th>Путь к файлу</th>
+          <th colspan="2">Действия</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for item in items %}
+          <tr data-id="{{ item.id }}">
+            <td>{{ item.id }}</td>
+            <td>{{ item.title }}</td>
+            <td>{{ item.description }}</td>
+            <td>{{ item.image_name }}</td>
+            <td>Удалить</td>
+            <td>Изменить</td>
+          </tr>
+        {% endfor %}
+        </tbody>
+      </table>
+
+      <form method="POST" action="" style="border: 1px solid black">
+        <h3>Товар №{% if items %}{{ items[0].id }}{% endif %}</h3>
+        <label for="form-item-id">ID</label>
+        <select name="id" id="form-item-id">
+          {% for item in items %}
+            <option value={{ item.id }}>{{ item.id }}</option>
+          {% endfor %}
+        </select>
+
+        <div class="params">
+          <div class="params-item">
+            <label for="form-item-title">Название:</label>
+            <input type="text" name="title" id="form-item-title" required>
+          </div>
+
+          <div class="params-item">
+            <label for="form-item-description">Описание:</label>
+            <input type="text" name="description" id="form-item-description">
+          </div>
+
+          <div class="params-item">
+            <label for="form-item-image_name">Картинка:</label>
+            <input type="file" name="image_name" id="form-item-image_name" required>
+          </div>
+        </div>
+
+        <button type="submit" name="apply">Применить</button>
+        <div class="message">{{ msg }}</div>
+      </form>
+    </div>
+  </section>
 {% endblock content %}

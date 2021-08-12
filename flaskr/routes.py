@@ -1,7 +1,7 @@
 from flask import request, render_template, redirect, url_for
 
 from flask_login import login_user, login_required, logout_user
-from flaskr.database_queries import select_user
+from flaskr.database_queries import select_user, select_flowers, update_flower, select_flower
 
 from flaskr import blueprint
 from flaskr.forms import LoginForm
@@ -32,7 +32,25 @@ def logout():
     return redirect(url_for('base_blueprint.login'))
 
 
-@blueprint.route('/admin')
+@blueprint.route('/admin', methods=['GET', 'POST'])
 @login_required
 def admin():
-    return render_template('admin.html')
+    flowers = select_flowers()
+    msg = None
+
+    if 'apply' in request.form:
+
+        for flower in flowers:
+            if flower.title == request.form['title']:
+                msg = 'Товар с таким именем уже существует'
+            elif flower.image_name == request.form['image_name']:
+                msg = 'Данное изображение уже существует'
+
+        if msg is None:
+            update_flower(request.form)
+            msg = 'Успешно'
+
+    elif 'delete':
+        print(f'delete {request.form}')
+
+    return render_template('admin.html', items=flowers, msg=msg)

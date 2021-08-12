@@ -25,3 +25,20 @@ class User(db.Model, UserMixin):
 def load_user(user_id):
     return User.query.get(user_id)
 
+
+class ItemFlower(db.Model):
+    __tablename__ = 'flowers'
+
+    id = Column(Integer, primary_key=True, autoincrement=True)
+    title = Column(String(50), nullable=False, unique=True)
+    description = Column(String(200))
+    image_name = Column(String(200), nullable=False, unique=True)
+
+    def __init__(self, title, description, image_name):
+        self.title = title
+        self.description = description
+        self.image_name = image_name
+
+    def __repr__(self):
+        return '<ItemFlower id={}, title={}, description={}, image_name={}/>'\
+            .format(self.id, self.title, self.description, self.image_name)
