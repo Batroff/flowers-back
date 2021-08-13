@@ -29,14 +29,14 @@
             <td>{{ item.title }}</td>
             <td>{{ item.description }}</td>
             <td>{{ item.image_name }}</td>
-            <td>Удалить</td>
+            <td><label for="delete">DEL</label></td>
             <td>Изменить</td>
           </tr>
         {% endfor %}
         </tbody>
       </table>
 
-      <form method="POST" action="" style="border: 1px solid black">
+      <form method="POST" id="form-edit" class="form-item">
         <h3>Товар №{% if items %}{{ items[0].id }}{% endif %}</h3>
         <label for="form-item-id">ID</label>
         <select name="id" id="form-item-id">
@@ -47,24 +47,47 @@
 
         <div class="params">
           <div class="params-item">
-            <label for="form-item-title">Название:</label>
-            <input type="text" name="title" id="form-item-title" required>
+            <label for="form-edit-title">Название:</label>
+            <input type="text" name="title" id="form-edit-title">
           </div>
 
           <div class="params-item">
-            <label for="form-item-description">Описание:</label>
-            <input type="text" name="description" id="form-item-description">
+            <label for="form-edit-description">Описание:</label>
+            <input type="text" name="description" id="form-edit-description">
           </div>
 
           <div class="params-item">
-            <label for="form-item-image_name">Картинка:</label>
-            <input type="file" name="image_name" id="form-item-image_name" required>
+            <label for="form-edit-image_name">Картинка:</label>
+            <input type="file" name="image_name" id="form-edit-image_name">
           </div>
         </div>
 
         <button type="submit" name="apply">Применить</button>
-        <div class="message">{{ msg }}</div>
+        {#        <input type="submit" name="delete" id="delete" hidden>#}
+      </form>
+
+      <form method="POST" id="form-add" class="form-item">
+        <div class="params">
+          <div class="params-item">
+            <label for="form-add-title">Название:</label>
+            <input type="text" name="title" id="form-add-title">
+          </div>
+
+          <div class="params-item">
+            <label for="form-add-description">Описание:</label>
+            <input type="text" name="description" id="form-add-description">
+          </div>
+
+          <div class="params-item">
+            <label for="form-add-image_name">Картинка:</label>
+            <input type="file" name="image_name" id="form-add-image_name">
+          </div>
+        </div>
+
+        <button type="submit" name="add">Добавить</button>
       </form>
     </div>
+
+    <div id="message">{{ msg }}</div>
   </section>
 {% endblock content %}

@@ -17,7 +17,7 @@ td, tr, th, table {
 
 td, th {
     border: 1px solid black;
-    padding: 5px 20px;
+    padding: 10px;
 }
 
 a {
@@ -39,18 +39,43 @@ a {
 }
 
 .panel {
-    padding: 50px 30px;
+    position: relative;
+    padding: 80px 30px;
     height: calc(100vh - 50px);
 }
 .panel > .wrapper {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-gap: 30px;
+    display: flex;
+    flex-flow: row nowrap;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 30px;
 }
+
+
 
 .panel > .params {
     display: flex;
     flex-flow: column nowrap;
     justify-content: center;
     align-items: center;
+}
+
+.form-item {
+    display: none;
+    border: 1px solid #000;
+}
+
+#form-add {
+    display: block;
+}
+
+#message {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: crimson;
+    color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-sizing: border-box;
 }
